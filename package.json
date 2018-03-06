@@ -4,7 +4,7 @@
   "private": true,
   "description": "Network PlayGround UI",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test",
     "e2e": "vue-cli-service e2e",
@@ -21,17 +21,17 @@
   },
   "devDependencies": {
     "@types/jest": "^22.0.1",
-    "@vue/cli-plugin-babel": "^3.0.0-beta.2",
-    "@vue/cli-plugin-e2e-cypress": "^3.0.0-beta.2",
-    "@vue/cli-plugin-typescript": "^3.0.0-beta.2",
-    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.2",
-    "@vue/cli-service": "^3.0.0-beta.2",
-    "@vue/test-utils": "^1.0.0-beta.10",
+    "@vue/cli-plugin-babel": "^3.0.0-beta.5",
+    "@vue/cli-plugin-e2e-cypress": "^3.0.0-beta.5",
+    "@vue/cli-plugin-typescript": "^3.0.0-beta.5",
+    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.5",
+    "@vue/cli-service": "^3.0.0-beta.5",
+    "@vue/test-utils": "^1.0.0-beta.12",
     "babel-core": "^7.0.0-0",
     "npm-check": "^5.5.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "ts-jest": "^22.0.1",
+    "ts-jest": "^22.4.1",
     "vue-template-compiler": "^2.5.13"
   },
   "browserslist": [
