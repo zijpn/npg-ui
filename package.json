@@ -13,7 +13,7 @@
     "e2e:open": "vue-cli-service e2e:open"
   },
   "dependencies": {
-    "vue": "^2.5.13",
+    "vue": "^2.5.15",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
@@ -21,18 +21,18 @@
   },
   "devDependencies": {
     "@types/jest": "^22.0.1",
-    "@vue/cli-plugin-babel": "^3.0.0-beta.5",
-    "@vue/cli-plugin-e2e-cypress": "^3.0.0-beta.5",
-    "@vue/cli-plugin-typescript": "^3.0.0-beta.5",
-    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.5",
-    "@vue/cli-service": "^3.0.0-beta.5",
+    "@vue/cli-plugin-babel": "^3.0.0-beta.6",
+    "@vue/cli-plugin-e2e-cypress": "^3.0.0-beta.6",
+    "@vue/cli-plugin-typescript": "^3.0.0-beta.6",
+    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.6",
+    "@vue/cli-service": "^3.0.0-beta.6",
     "@vue/test-utils": "^1.0.0-beta.12",
     "babel-core": "^7.0.0-0",
     "npm-check": "^5.5.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-jest": "^22.4.1",
-    "vue-template-compiler": "^2.5.13"
+    "vue-template-compiler": "^2.5.15"
   },
   "browserslist": [
     "> 1%",
