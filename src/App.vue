@@ -1,32 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <header id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    </header>
+    <main>
+      <router-view/>
+    </main>
+    <status-bar/>
   </div>
 </template>
 
-<style>
+<script lang="ts">
+import StatusBar from '@/components/StatusBar.vue' // @ is an alias to /src
+import { Component, Vue } from 'vue-property-decorator'
+@Component({
+  components: {
+    StatusBar,
+  },
+})
+export default class App extends Vue {}
+</script>
+
+<style lang="scss">
+@import '~bulma';
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+ 
+main {
+  flex: 1;
+  width: 100%;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
