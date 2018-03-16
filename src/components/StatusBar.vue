@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts">
+import socket from '@/socket'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
@@ -19,8 +20,21 @@ export default class StatusBar extends Vue {
   // https://github.com/vuejs/vetur/issues/682
   @Prop({default: '0.1.0'})
   public uiVersion: string
-  @Prop({default: 'dev'})
-  public serverVersion: string
+
+  // computed
+  get serverVersion() {
+    return this.$store.state.serverVersion
+  }
+
+  // lifecycle hook
+  public mounted() {
+    socket.on('connect', () => {
+      socket.emit('version')
+      socket.on('version', (version: string) => {
+        this.$store.dispatch('setServerVersion', version)
+      })
+    })
+  }
 }
 </script>
 
@@ -28,6 +42,7 @@ export default class StatusBar extends Vue {
 .footer {
   padding: 2px;
   font-size: 12px;
+  height: 22px;
 }
 .version {
   display: flex;
