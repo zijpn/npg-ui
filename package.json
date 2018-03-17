@@ -5,6 +5,7 @@
   "description": "Network PlayGround UI",
   "scripts": {
     "serve": "vue-cli-service serve --open",
+    "dev": "VUE_APP_SOCKET=false vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test",
     "e2e": "vue-cli-service e2e",
