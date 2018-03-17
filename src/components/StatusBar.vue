@@ -40,9 +40,12 @@ export default class StatusBar extends Vue {
 
 <style scoped lang="scss">
 .footer {
-  padding: 2px;
+  padding: 0 10px;
   font-size: 12px;
   height: 22px;
+  line-height: 22px;
+  background-color: #007BCC;
+  color: white;
 }
 .version {
   display: flex;
