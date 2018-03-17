@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <header id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </header>
+    <side-bar/>
     <main>
+      <header id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </header>
       <router-view/>
     </main>
     <status-bar/>
@@ -12,10 +13,12 @@
 </template>
 
 <script lang="ts">
-import StatusBar from '@/components/StatusBar.vue' // @ is an alias to /src
+import SideBar from '@/components/SideBar.vue'
+import StatusBar from '@/components/StatusBar.vue'
 import { Component, Vue } from 'vue-property-decorator'
 @Component({
   components: {
+    SideBar,
     StatusBar,
   },
 })
@@ -26,14 +29,15 @@ export default class App extends Vue {}
 @import '~bulma';
 
 #app {
-  display: flex;
   min-height: 100vh;
-  flex-direction: column;
-}
- 
-main {
-  flex: 1;
-  width: 100%;
 }
 
+main {
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  bottom: 22px;
+  width: calc(100vw - 50px);
+  padding: 0 5px;
+}
 </style>
