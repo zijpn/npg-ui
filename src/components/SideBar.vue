@@ -1,10 +1,12 @@
 <template>
   <div class="sidebar">
-    <div class="item">
+    <div class="item tooltip">
+      <span class="tooltiptext">Project</span>
       <font-awesome-icon :icon="fileIcon" />
     </div>
-    <div class="item">
-      <font-awesome-icon :icon="terminalIcon" size="xs" />
+    <div class="item tooltip">
+      <span class="tooltiptext">Terminal</span>
+      <font-awesome-icon :icon="terminalIcon" />
     </div>
   </div>
 </template>
@@ -36,6 +38,7 @@ export default class SideBar extends Vue {
 </script>
 
 <style scoped lang="scss">
+
 .sidebar {
   width: 50px;
   background-color: rgb(51, 51, 51);
@@ -46,14 +49,62 @@ export default class SideBar extends Vue {
   display: flex;
   flex-direction: column;
 }
-.sidebar>.item {
+
+.item {
   cursor: pointer;
-  transition: transform 50ms ease;
-  overflow: hidden;
   height: 40px;
-  line-height: 40px;
-  margin-right: 0;
+  margin: 0;
+  padding: 10px 0;
   color: white;
+  font-size: 14px;
   text-align: center;
+  color: grey;
 }
+
+.item:hover {
+  color: white;
+}
+
+// https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_arrow_left
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  max-width: 24rem;
+  background: rgba(74, 74, 74, 0.9);
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 1;
+  top: auto;
+  left: 100%;
+  bottom: 50%;
+  right: auto;
+  opacity: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  padding: .4rem .8rem;
+  transform: translate(0.5rem, 50%);
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  border-width: .5rem;
+  border-style: solid;
+  border-color: transparent rgba(74, 74, 74, 0.9) transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0s linear 1s;
+}
+
 </style>
