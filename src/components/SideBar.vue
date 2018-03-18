@@ -13,14 +13,9 @@
 import socket from '@/socket'
 import faFile from '@fortawesome/fontawesome-free-solid/faFile'
 import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-@Component({
-  components: {
-    FontAwesomeIcon,
-  },
-})
+@Component
 export default class SideBar extends Vue {
   get fileIcon() {
     return faFile
