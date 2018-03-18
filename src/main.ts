@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import { VTooltip } from 'v-tooltip'
+Vue.directive('tooltip', VTooltip)
+
 new Vue({
   render: (h) => h(App),
   router,
