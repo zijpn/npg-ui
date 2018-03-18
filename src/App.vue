@@ -2,11 +2,23 @@
   <div id="app">
     <side-bar/>
     <main>
-      <header id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
-      </header>
-      <router-view/>
+      <vue-split :elements="[ '#slotOne', '#slotTwo' ]" 
+        direction="vertical"
+        :min-size="[80,0]"
+        :gutter-size="1"
+        :snap-offset="60">
+        <div id="slotOne">
+          <h2 style="text-align: center;">editor</h2>
+        </div>
+        <div id="slotTwo">
+          <h2 style="text-align: center;">panel</h2> 
+          <div id="nav">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/about">About</router-link>
+          </div>
+          <router-view/>
+        </div>
+      </vue-split>
     </main>
     <status-bar/>
   </div>
@@ -40,7 +52,6 @@ main {
   top: 0px;
   bottom: 22px;
   width: calc(100vw - 50px);
-  padding: 0 5px;
 }
 
 .tooltip .tooltip-inner {
@@ -119,6 +130,10 @@ main {
   left: calc(50% - 8px);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.gutter.gutter-vertical {
+  cursor: row-resize !important;
 }
 
 </style>
