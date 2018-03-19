@@ -2,16 +2,16 @@
   <div id="app">
     <side-bar/>
     <main>
-      <vue-split :elements="[ '#editor', '#panel' ]" 
+      <split-view :elements="[ '#editor', '#panel' ]" 
         :direction="'vertical'"
         :sizes="[100,0]"
         :min-size="[80,0]"
         :gutter-size="1"
         :snap-offset="60"
-        @onDragEnd="splitChanged">
+        @onDragEnd="viewChanged">
         <editor id="editor"></editor>
         <panel id="panel"></panel>
-      </vue-split>
+      </split-view>
     </main>
     <status-bar/>
   </div>
@@ -21,6 +21,7 @@
 import Editor from '@/components/Editor.vue'
 import Panel from '@/components/Panel.vue'
 import SideBar from '@/components/SideBar.vue'
+import SplitView from '@/components/SplitView.vue'
 import StatusBar from '@/components/StatusBar.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
@@ -29,13 +30,13 @@ import { Component, Vue } from 'vue-property-decorator'
     Editor,
     Panel,
     SideBar,
+    SplitView,
     StatusBar,
   },
 })
 export default class App extends Vue {
-  // methods
-  splitChanged() {
-    console.log("split changed -> save editor height")
+  public viewChanged(sizes: string[]) {
+    this.$store.dispatch('setEditorHeight', sizes[0])
   }
 }
 </script>
@@ -132,10 +133,6 @@ main {
   left: calc(50% - 8px);
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.gutter.gutter-vertical {
-  cursor: row-resize !important;
 }
 
 </style>
