@@ -1,0 +1,17 @@
+<template>
+  <div>
+    <h2 style="text-align: center;">editor</h2>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component
+export default class Editor extends Vue {
+}
+</script>
+
+<style scoped lang="scss">
+
+</style>

@@ -2,22 +2,15 @@
   <div id="app">
     <side-bar/>
     <main>
-      <vue-split :elements="[ '#slotOne', '#slotTwo' ]" 
-        direction="vertical"
+      <vue-split :elements="[ '#editor', '#panel' ]" 
+        :direction="'vertical'"
+        :sizes="[100,0]"
         :min-size="[80,0]"
         :gutter-size="1"
-        :snap-offset="60">
-        <div id="slotOne">
-          <h2 style="text-align: center;">editor</h2>
-        </div>
-        <div id="slotTwo">
-          <h2 style="text-align: center;">panel</h2> 
-          <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
-          </div>
-          <router-view/>
-        </div>
+        :snap-offset="60"
+        @onDragEnd="splitChanged">
+        <editor id="editor"></editor>
+        <panel id="panel"></panel>
       </vue-split>
     </main>
     <status-bar/>
@@ -25,17 +18,26 @@
 </template>
 
 <script lang="ts">
+import Editor from '@/components/Editor.vue'
+import Panel from '@/components/Panel.vue'
 import SideBar from '@/components/SideBar.vue'
 import StatusBar from '@/components/StatusBar.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
+    Editor,
+    Panel,
     SideBar,
     StatusBar,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  // methods
+  splitChanged() {
+    console.log("split changed -> save editor height")
+  }
+}
 </script>
 
 <style lang="scss">
