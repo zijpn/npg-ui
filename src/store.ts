@@ -18,6 +18,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    logPanelActive: (state) => {
+      return state.panelVisible && state.panelActive === 2
+    },
     panelVisible: (state) => {
       return state.panelVisible
     },
@@ -49,7 +52,7 @@ export default new Vuex.Store({
     },
   },
   state: {
-    // current panel (0=project, 1=terminal)
+    // current panel (0=project, 1=terminal, 2=log)
     panelActive: 0,
     // height of panel in percent
     panelHeight: DEFAULT_PANEL_HEIGHT,

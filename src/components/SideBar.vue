@@ -10,10 +10,16 @@
          v-bind:class="{'active': terminalActive}">
       <font-awesome-icon :icon="terminalIcon" />
     </div>
+    <div class="item" @click="togglePanel(2)"
+         v-tooltip.right="{ content: 'Logs', delay: { show: 1500 } }"
+         v-bind:class="{'active': logActive}">
+      <font-awesome-icon :icon="logIcon" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import faBug from '@fortawesome/fontawesome-free-solid/faBug'
 import faFile from '@fortawesome/fontawesome-free-solid/faFile'
 import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
 import { Component, Vue } from 'vue-property-decorator'
@@ -28,12 +34,20 @@ export default class SideBar extends Vue {
     return faTerminal
   }
 
+  get logIcon() {
+    return faBug
+  }
+
   get projectActive() {
     return this.$store.getters.projectPanelActive
   }
 
   get terminalActive() {
     return this.$store.getters.terminalPanelActive
+  }
+
+  get logActive() {
+    return this.$store.getters.logPanelActive
   }
 
   public togglePanel(index: number) {
