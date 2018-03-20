@@ -11,7 +11,7 @@
       <font-awesome-icon :icon="terminalIcon" />
     </div>
     <div class="item" @click="togglePanel(2)"
-         v-tooltip.right="{ content: 'Logs', delay: { show: 1500 } }"
+         v-tooltip.right="{ content: 'Log', delay: { show: 1500 } }"
          v-bind:class="{'active': logActive}">
       <font-awesome-icon :icon="logIcon" />
     </div>

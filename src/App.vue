@@ -46,12 +46,12 @@ export default class App extends Vue {
         return this.$store.getters.panelVisible
       },
       (visible) => {
-        const split = this.$refs.split as SplitView
+        const s = this.$refs.split as SplitView
         if (visible) {
           const h = this.$store.state.panelHeight
-          split.setSizes([100 - h, h])
+          s.setSizes([100 - h, h])
         } else {
-          split.collapse(1)
+          s.collapse(1)
         }
       },
     )
@@ -62,6 +62,7 @@ export default class App extends Vue {
 <style lang="scss">
 // global style (i.e. not scoped)
 @import '~bulma';
+// @import '~buefy/src/scss/buefy';
 
 #app {
   min-height: 100vh;
@@ -151,6 +152,33 @@ main {
   left: calc(50% - 8px);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.tabs a {
+  color: rgba(231, 231, 231, 0.5);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: rgb(30, 30, 30);
+}
+
+.tabs a:hover {
+  color: #fff;
+}
+
+.tabs li.is-active a {
+  border-bottom-color: #3273dc;
+}
+
+.tabs {
+  margin-bottom: 0 !important;
+}
+
+.tabs ul {
+  border-bottom-style: none;
+}
+
+.b-tabs .tab-content {
+  padding: 4px 10px;
 }
 
 </style>

@@ -7,4 +7,4 @@ declare module '*.vue' {
 declare module '@fortawesome/*'
 
 declare module 'v-tooltip'
-declare module 'vue-splitjs'
+declare module 'buefy'

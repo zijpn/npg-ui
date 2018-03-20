@@ -5,7 +5,7 @@ Initial scaffolding with [vue-cli].
 ```
 $ npm install -g @vue/cli
 $ vue create npg-ui
-    Features: TS, Router, Vuex, CSS Pre-processors, Linter, Unit, E2E
+    Features: TS, Vuex, CSS Pre-processors, Linter, Unit, E2E
     CSS pre-processor: SCSS/SASS
     Linter config: TSLint
     Unit testing solution: Jest
