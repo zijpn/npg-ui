@@ -1,27 +1,43 @@
 <template>
   <div class="sidebar">
-    <div class="item" v-tooltip.right="{ content: 'Project', delay: { show: 1500 } }">
+    <div class="item" @click="togglePanel(0)"
+         v-tooltip.right="{ content: 'Project', delay: { show: 1500 } }"
+         v-bind:class="{'active': projectActive}">
       <font-awesome-icon :icon="fileIcon" />
     </div>
-    <div class="item" v-tooltip.right="{ content: 'Terminal', delay: { show: 1500 } }">
+    <div class="item" @click="togglePanel(1)"
+         v-tooltip.right="{ content: 'Terminal', delay: { show: 1500 } }"
+         v-bind:class="{'active': terminalActive}">
       <font-awesome-icon :icon="terminalIcon" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import socket from '@/socket'
 import faFile from '@fortawesome/fontawesome-free-solid/faFile'
 import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class SideBar extends Vue {
   get fileIcon() {
     return faFile
   }
+
   get terminalIcon() {
     return faTerminal
+  }
+
+  get projectActive() {
+    return this.$store.getters.projectPanelActive
+  }
+
+  get terminalActive() {
+    return this.$store.getters.terminalPanelActive
+  }
+
+  public togglePanel(index: number) {
+    this.$store.dispatch('togglePanel', index)
   }
 }
 </script>
@@ -50,7 +66,7 @@ export default class SideBar extends Vue {
   color: grey;
 }
 
-.item:hover {
+.item:hover, .active {
   color: white;
 }
 

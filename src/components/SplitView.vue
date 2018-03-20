@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="split-container">
     <slot></slot>
   </div>
@@ -29,11 +29,17 @@ export default class SplitView extends Vue {
 
   // methods
   public onDragEnd() {
-    const sizes = this.split.getSizes()
-    this.$emit('onDragEnd', sizes)
+    this.$emit('onDragEnd', this.split.getSizes())
   }
 
-  // lifecycle hook
+  public collapse(index: number) {
+    this.split.collapse(index)
+  }
+
+  public setSizes(sizes: number[]) {
+    this.split.setSizes(sizes)
+  }
+
   public mounted() {
     const options: Split.Options = {
       cursor: this.direction === 'horizontal' ? 'col-resize' : 'row-resize',

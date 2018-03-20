@@ -2,13 +2,14 @@
   <div id="app">
     <side-bar/>
     <main>
-      <split-view :elements="[ '#editor', '#panel' ]" 
+      <split-view ref="split" 
+        :elements="[ '#editor', '#panel' ]" 
         :direction="'vertical'"
         :sizes="[100,0]"
         :min-size="[80,0]"
         :gutter-size="1"
         :snap-offset="60"
-        @onDragEnd="viewChanged">
+        @onDragEnd="splitChanged">
         <editor id="editor"></editor>
         <panel id="panel"></panel>
       </split-view>
@@ -35,8 +36,25 @@ import { Component, Vue } from 'vue-property-decorator'
   },
 })
 export default class App extends Vue {
-  public viewChanged(sizes: string[]) {
-    this.$store.dispatch('setEditorHeight', sizes[0])
+  public splitChanged(sizes: string[]) {
+    this.$store.dispatch('setPanelHeight', sizes[1])
+  }
+
+  public mounted() {
+    this.$store.watch(
+      (state) => {
+        return this.$store.getters.panelVisible
+      },
+      (visible) => {
+        const split = this.$refs.split as SplitView
+        if (visible) {
+          const h = this.$store.state.panelHeight
+          split.setSizes([100 - h, h])
+        } else {
+          split.collapse(1)
+        }
+      },
+    )
   }
 }
 </script>
