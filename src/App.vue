@@ -163,6 +163,7 @@ main {
 
 .tabs a:hover {
   color: #fff;
+  border-bottom-color: rgb(30, 30, 30);
 }
 
 .tabs li.is-active a {
@@ -179,6 +180,7 @@ main {
 
 .b-tabs .tab-content {
   padding: 4px 10px;
+  overflow: hidden;
 }
 
 </style>

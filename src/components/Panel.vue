@@ -11,7 +11,7 @@
         LOG TAB
       </b-tab-item>
     </b-tabs>
-    <div class="close" @click="closePanel()" v-tooltip.top="{ content: 'Close Panel', delay: { show: 1500 } }">
+    <div class="close" @click="closePanel()" v-tooltip.bottom="{ content: 'Close Panel', delay: { show: 1500 } }">
       <font-awesome-icon :icon="closeIcon" size="xs" />
     </div>
   </div>

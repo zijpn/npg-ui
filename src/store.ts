@@ -36,6 +36,7 @@ export default new Vuex.Store({
   },
   mutations: {
     ['SET_PANEL_HEIGHT'](state, height) {
+      state.panelHeightSaved = state.panelHeight
       state.panelHeight = height
       state.panelVisible = (Math.round(state.panelHeight) !== 0)
     },
@@ -53,13 +54,14 @@ export default new Vuex.Store({
         state.panelVisible = !state.panelVisible
       }
       if (state.panelVisible && Math.round(state.panelHeight) === 0) {
-        state.panelHeight = DEFAULT_PANEL_HEIGHT
+        state.panelHeight = state.panelHeightSaved
       }
     },
   },
   state: {
     // height of panel in percent
     panelHeight: DEFAULT_PANEL_HEIGHT,
+    panelHeightSaved: DEFAULT_PANEL_HEIGHT,
     // current panel (0=project, 1=terminal, 2=log)
     panelTab: 0,
     // panel visibility
