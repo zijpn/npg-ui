@@ -55,7 +55,8 @@ export default class SplitView extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
+// style is not scoped ! we need to style split.js
 
 .split-container {
   height: 100%;

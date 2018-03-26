@@ -10,9 +10,6 @@ Vue.directive('tooltip', VTooltip)
 
 // global components
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import Buefy from 'buefy'
-Vue.component('b-tab-item', Buefy.TabItem)
-Vue.component('b-tabs', Buefy.Tabs)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({

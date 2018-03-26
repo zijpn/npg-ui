@@ -154,33 +154,4 @@ main {
   margin-bottom: 0;
 }
 
-.tabs a {
-  color: rgba(231, 231, 231, 0.5);
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: rgb(30, 30, 30);
-}
-
-.tabs a:hover {
-  color: #fff;
-  border-bottom-color: rgb(30, 30, 30);
-}
-
-.tabs li.is-active a {
-  border-bottom-color: #3273dc;
-}
-
-.tabs {
-  margin-bottom: 0 !important;
-}
-
-.tabs ul {
-  border-bottom-style: none;
-}
-
-.b-tabs .tab-content {
-  padding: 4px 10px;
-  overflow: hidden;
-}
-
 </style>

@@ -1,16 +1,16 @@
 <template>
   <div class="panel">
-    <b-tabs size="is-small" :animated="false" v-model="activeTab">
-      <b-tab-item label="PROJECT">
+    <tabs>
+      <tab label="PROJECT">
         PROJECT TAB
-      </b-tab-item>
-      <b-tab-item label="TERMINAL">
+      </tab>
+      <tab label="TERMINAL">
         TERMINAL TAB
-      </b-tab-item>
-      <b-tab-item label="LOG">
+      </tab>
+      <tab label="LOG">
         LOG TAB
-      </b-tab-item>
-    </b-tabs>
+      </tab>
+    </tabs>
     <div class="close" @click="closePanel()" v-tooltip.bottom="{ content: 'Close Panel', delay: { show: 1500 } }">
       <font-awesome-icon :icon="closeIcon" size="xs" />
     </div>
@@ -18,22 +18,21 @@
 </template>
 
 <script lang="ts">
+import Tab from '@/components/Tab.vue'
+import Tabs from '@/components/Tabs.vue'
 import faWindowClose from '@fortawesome/fontawesome-free-solid/faWindowClose'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
-@Component
+@Component({
+  components: {
+    Tab,
+    Tabs,
+  },
+})
 export default class Panel extends Vue {
 
   get closeIcon() {
     return faWindowClose
-  }
-
-  get activeTab() {
-    return this.$store.state.panelTab
-  }
-
-  set activeTab(index: number) {
-    this.$store.dispatch('setPanelTab', index)
   }
 
   public closePanel() {
