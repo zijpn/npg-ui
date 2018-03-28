@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="version">
+    <div class="version disable-select">
       ui {{uiVersion}}, server {{serverVersion}}
     </div>
   </footer>

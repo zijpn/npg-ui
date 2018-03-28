@@ -2,13 +2,13 @@
   <div class="panel">
     <tabs>
       <tab label="PROJECT">
-        PROJECT TAB
+        <project></project>
       </tab>
       <tab label="TERMINAL">
-        TERMINAL TAB
+        <term></term>
       </tab>
       <tab label="LOG">
-        LOG TAB
+        <log></log>
       </tab>
     </tabs>
     <div class="close" @click="closePanel()" v-tooltip.bottom="{ content: 'Close Panel', delay: { show: 1500 } }">
@@ -18,15 +18,21 @@
 </template>
 
 <script lang="ts">
+import Log from '@/components/Log.vue'
+import Project from '@/components/Project.vue'
 import Tab from '@/components/Tab.vue'
 import Tabs from '@/components/Tabs.vue'
+import Term from '@/components/Term.vue'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
+    Log,
+    Project,
     Tab,
     Tabs,
+    Term,
   },
 })
 export default class Panel extends Vue {
@@ -43,8 +49,8 @@ export default class Panel extends Vue {
 <style scoped lang="scss">
 .close {
   position: absolute;
-  top: 9px;
-  right: 9px;
+  top: 9.5px;
+  right: 9.5px;
   cursor: pointer;
 }
 .panel {
