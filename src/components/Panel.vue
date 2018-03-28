@@ -46,7 +46,7 @@ export default class Panel extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .close {
   position: absolute;
   top: 9.5px;
@@ -60,6 +60,7 @@ export default class Panel extends Vue {
   flex-direction: column;
 }
 .panel > div {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   flex: 1;

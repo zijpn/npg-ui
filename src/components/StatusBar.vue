@@ -38,7 +38,7 @@ export default class StatusBar extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .footer {
   padding: 0 10px;
   font-size: 12px;

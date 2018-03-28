@@ -1,21 +1,33 @@
 <template>
   <div>
-    <h2 style="text-align: center;">debug log</h2>
-    <div class="clear" @click="clearLogs()" v-tooltip.bottom="{ content: 'Clear Log', delay: { show: 1500 } }">
-      <font-awesome-icon :icon="clearIcon" size="xs" />
-    </div>
     <div class="select">
-      <select v-model="selected" @change="levelChanged()">
+      <select v-model="selected">
         <option>Debug</option>
         <option>Info</option>
         <option>Warning</option>
         <option>Error</option>
       </select>
     </div>
+    <div class="clear" @click="clearLogs()" v-tooltip.bottom="{ content: 'Clear Log', delay: { show: 1500 } }">
+      <font-awesome-icon :icon="clearIcon" size="xs" />
+    </div>
+    <div class="empty" v-if="logEmpty()">
+      <h2>empty log</h2>
+    </div>
+    <div v-else class="logs">
+      <table>
+        <tr v-for="(log, idx) in filteredLogs" :class="log.level" :key="idx">
+          <td class="time">{{log.time}}</td>
+          <td class="lvl">{{log.level}}</td>
+          <td class="msg">{{log.msg}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import socket from '@/socket'
 import faEraser from '@fortawesome/fontawesome-free-solid/faEraser'
 import { Component, Provide, Vue } from 'vue-property-decorator'
 
@@ -24,16 +36,60 @@ export default class Log extends Vue {
   @Provide()
   public selected: string = 'Info'
 
+  @Provide()
+  public logs: Array<{ time: string, level: string, msg: string }> = []
+
+  public clearLogs() {
+    this.logs = []
+  }
+
+  public logEmpty() {
+    return this.logs.length === 0
+  }
+
+  public appendLog(log: { timestamp: Date, level: string, msg: string }) {
+    const ts = new Date(log.timestamp)
+    this.logs.unshift({
+      level: log.level,
+      msg: log.msg,
+      time: ts.toLocaleString(),
+    })
+  }
+
+  public mounted() {
+    /*
+    // some test data
+    for (let i = 0; i < 50; i++) {
+      this.appendLog({ level: 'info', msg: `log message ${i}`, timestamp: new Date() })
+    }
+    this.appendLog({ level: 'warn', msg: 'pas op!', timestamp: new Date() })
+    this.appendLog({ level: 'error', msg: 'debug string that is longer so that we can test', timestamp: new Date() })
+    this.appendLog({ level: 'debug', msg: 'details ... ', timestamp: new Date() })
+    */
+    socket.on('connect', () => {
+      socket.on('message', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
+        msg.forEach(this.appendLog)
+      })
+    })
+  }
+
   get clearIcon() {
     return faEraser
   }
 
-  public clearLogs() {
-    // TODO
+  get filteredLogs() {
+    return this.logs.filter((log) => this.levelToVal(log.level) <= this.levelToVal(this.selected))
   }
 
-  public levelChanged() {
-    // TODO
+  private levelToVal(level: string) {
+    // { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
+    switch (level.toLowerCase().substring(0, 4)) {
+      case 'debu': return 4
+      case 'info': return 2
+      case 'warn': return 1
+      case 'erro': return 0
+      default: return 2
+    }
   }
 }
 </script>
@@ -70,5 +126,45 @@ select:active select:focus {
   right: 0.6em;
   border-top: 0px;
   border-right: 0px;
+}
+.empty {
+  padding-top: 40px;
+  text-align: center;
+}
+.logs {
+  padding-top: 8px; 
+  overflow-y: scroll;
+}
+tr {
+  font-family: monospace;
+  font-size: 12px;
+  vertical-align: top;
+}
+td {
+  display: inline-block;
+  padding: 0;
+  padding-left: 8px;
+  vertical-align: top;
+}
+td.time {
+  width: 160px;
+}
+td.lvl {
+  width: 50px;
+}
+td.msg {
+  width: calc(100vw - 218px - 50px);
+}
+tr.debug {
+  color: grey;
+}
+tr.info {
+  color: white;
+}
+tr.warn {
+  color: goldenrod;
+}
+tr.error {
+  color: orangered;
 }
 </style>

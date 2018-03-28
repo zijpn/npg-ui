@@ -56,7 +56,7 @@ export default class SideBar extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 .sidebar {
   width: 50px;

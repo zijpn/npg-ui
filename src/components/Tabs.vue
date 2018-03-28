@@ -61,7 +61,7 @@ export default class Tabs extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 .tabs {
   margin-bottom: 0;
@@ -96,6 +96,7 @@ export default class Tabs extends Vue {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .tab-content > div {
