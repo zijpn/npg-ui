@@ -33,7 +33,6 @@ export default class Tab extends Vue {
     const parent = this.$parent as Tabs
     parent.unregister(this)
   }
-
 }
 </script>
 

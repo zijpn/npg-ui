@@ -92,12 +92,14 @@ export default class Tabs extends Vue {
   border-bottom-style: none;
 }
 
-.b-tabs .tab-content {
-  position: relative;
+.tab-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 4px 10px;
-  overflow: hidden;
+}
+
+.tab-content > div {
+  flex: 1;
 }
 
 </style>

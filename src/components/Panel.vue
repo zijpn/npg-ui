@@ -20,8 +20,8 @@
 <script lang="ts">
 import Tab from '@/components/Tab.vue'
 import Tabs from '@/components/Tabs.vue'
-import faWindowClose from '@fortawesome/fontawesome-free-solid/faWindowClose'
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
@@ -30,32 +30,32 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
   },
 })
 export default class Panel extends Vue {
-
   get closeIcon() {
-    return faWindowClose
+    return faTimes
   }
 
   public closePanel() {
     this.$store.dispatch('setPanelHeight', 0)
   }
-
 }
 </script>
 
 <style scoped lang="scss">
-
+.close {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  cursor: pointer;
+}
 .panel {
   background-color: rgb(30, 30, 30);
   color: rgb(204, 204, 204);
+  display: flex;
+  flex-direction: column;
 }
-
-.close {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  padding: 0 12px;
-  line-height: 30px;
-  cursor: pointer;
+.panel > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
-
 </style>

@@ -61,11 +61,15 @@ export default class App extends Vue {
 
 <style lang="scss">
 // global style (i.e. not scoped)
+
 @import '~bulma';
-// @import '~buefy/src/scss/buefy';
+
+html {
+  overflow-y: hidden;
+}
 
 #app {
-  min-height: 100vh;
+  height: 100vh;
 }
 
 main {
