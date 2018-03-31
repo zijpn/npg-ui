@@ -1,4 +1,6 @@
-# Network PlayGround UI
+# Network PlayGround UI 
+
+[![Build Status](https://travis-ci.org/zijpn/npg-ui.svg?branch=master)](https://travis-ci.org/zijpn/npg-ui)
 
 Initial scaffolding with [vue-cli].
 
