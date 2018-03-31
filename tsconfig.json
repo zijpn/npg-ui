@@ -19,7 +19,8 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "plugins": [{ "name": "ts-vue-plugin" }]
   },
   "include": [
     "src/**/*.ts",
