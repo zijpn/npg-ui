@@ -11,7 +11,7 @@ describe('StatusBar.vue', () => {
       serverVersion: 'dev',
     },
   })
-  it('renders', () => {
+  it('render', () => {
     const msg = 'ui 0.1.0, server dev'
     const wrapper = shallow(StatusBar, {
       localVue,

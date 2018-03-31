@@ -11,7 +11,7 @@
     <div class="clear" @click="clearLogs()" v-tooltip.bottom="{ content: 'Clear Log', delay: { show: 1500 } }">
       <font-awesome-icon :icon="clearIcon" size="xs" />
     </div>
-    <div class="empty" v-if="logEmpty()">
+    <div v-if="logEmpty()" class="empty">
       <h2>empty log</h2>
     </div>
     <div v-else class="logs">
@@ -57,15 +57,6 @@ export default class Log extends Vue {
   }
 
   public mounted() {
-    /*
-    // some test data
-    for (let i = 0; i < 50; i++) {
-      this.appendLog({ level: 'info', msg: `log message ${i}`, timestamp: new Date() })
-    }
-    this.appendLog({ level: 'warn', msg: 'pas op!', timestamp: new Date() })
-    this.appendLog({ level: 'error', msg: 'debug string that is longer so that we can test', timestamp: new Date() })
-    this.appendLog({ level: 'debug', msg: 'details ... ', timestamp: new Date() })
-    */
     socket.on('connect', () => {
       this.clearLogs()
       socket.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
