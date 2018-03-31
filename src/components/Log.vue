@@ -67,7 +67,8 @@ export default class Log extends Vue {
     this.appendLog({ level: 'debug', msg: 'details ... ', timestamp: new Date() })
     */
     socket.on('connect', () => {
-      socket.on('message', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
+      this.clearLogs()
+      socket.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
         msg.forEach(this.appendLog)
       })
     })
