@@ -39,8 +39,7 @@ export default class Tab extends Vue {
 <style lang="scss" scoped>
 
 .tab-item {
-  flex-shrink: 0;
-  flex-basis: auto;
+  flex: 1;
 }
 
 </style>

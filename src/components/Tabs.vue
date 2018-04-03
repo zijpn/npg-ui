@@ -101,6 +101,8 @@ export default class Tabs extends Vue {
 
 .tab-content > div {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 </style>
