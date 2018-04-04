@@ -28,9 +28,10 @@ export default class StatusBar extends Vue {
 
   // lifecycle hook
   public mounted() {
-    socket.on('connect', () => {
-      socket.emit('version')
-      socket.on('version', (version: string) => {
+    const sock = socket.io.socket('/server')
+    sock.on('connect', () => {
+      sock.emit('version')
+      sock.on('version', (version: string) => {
         this.$store.dispatch('setServerVersion', version)
       })
     })

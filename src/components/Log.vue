@@ -57,9 +57,10 @@ export default class Log extends Vue {
   }
 
   public mounted() {
-    socket.on('connect', () => {
+    const sock = socket.io.socket('/log')
+    sock.on('connect', () => {
       this.clearLogs()
-      socket.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
+      sock.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
         msg.forEach(this.appendLog)
       })
     })
