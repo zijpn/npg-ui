@@ -1,5 +1,5 @@
 import StatusBar from '@/components/StatusBar.vue'
-import { createLocalVue, shallow } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 const localVue = createLocalVue()
@@ -13,7 +13,7 @@ describe('StatusBar.vue', () => {
   })
   it('render', () => {
     const msg = 'ui 0.1.0, server dev'
-    const wrapper = shallow(StatusBar, {
+    const wrapper = shallowMount(StatusBar, {
       localVue,
       mocks: {
         $store: store,

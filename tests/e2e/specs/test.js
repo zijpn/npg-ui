@@ -3,6 +3,6 @@
 describe('My First Test', () => {
   it('Visits the Kitchen Sink', () => {
     cy.visit('/')
-    cy.contains('h1', 'This is the home page')
+    cy.contains('h2', 'editor')
   })
 })
