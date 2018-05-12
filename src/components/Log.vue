@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="select">
+    <div class="loglevel">
       <select v-model="selected">
         <option>Debug</option>
         <option>Info</option>
@@ -94,13 +94,13 @@ export default class Log extends Vue {
   right: 30px;
   cursor: pointer;
 }
-.select {
+.loglevel {
   position: absolute;
-  top: 5px;
+  top: 2px;
   right: 54px;
-  height: 20px;
+  height: 24px;
 }
-select {
+.loglevel select {
   font-size: 0.8em;
   background-color: rgb(60, 60, 60);
   color: rgb(240, 240, 240);
@@ -108,17 +108,9 @@ select {
   border: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
-  height: 20px;
 }
-select:active select:focus {
-  border-color: rgb(60, 60, 60);
-  box-shadow: none;
-}
-.select::after {
-  border: 1px solid white;
-  right: 0.6em;
-  border-top: 0px;
-  border-right: 0px;
+.loglevel select:active, .loglevel select:focus {
+  outline-style: none;
 }
 .empty {
   padding-top: 40px;
