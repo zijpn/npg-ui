@@ -8,11 +8,11 @@ Vue.config.productionTip = false
 import { VTooltip } from 'v-tooltip'
 Vue.directive('tooltip', VTooltip)
 
-// global components
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-import { ResizeObserver } from 'vue-resize'
-Vue.component('resize-observer', ResizeObserver)
+// global components (lazy loaded)
+Vue.component('font-awesome-icon', () => import('@fortawesome/vue-fontawesome')
+  .then(({ FontAwesomeIcon }) => FontAwesomeIcon))
+Vue.component('resize-observer', () => import('vue-resize')
+  .then(({ ResizeObserver }) => ResizeObserver))
 
 new Vue({
   render: (h) => h(App),
