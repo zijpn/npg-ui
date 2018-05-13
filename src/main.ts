@@ -9,9 +9,9 @@ import { VTooltip } from 'v-tooltip'
 Vue.directive('tooltip', VTooltip)
 
 // global components (lazy loaded)
-Vue.component('font-awesome-icon', () => import('@fortawesome/vue-fontawesome')
+Vue.component('font-awesome-icon', () => import(/* webpackChunkName: "fa" */ '@fortawesome/vue-fontawesome')
   .then(({ FontAwesomeIcon }) => FontAwesomeIcon))
-Vue.component('resize-observer', () => import('vue-resize')
+Vue.component('resize-observer', () => import(/* webpackChunkName: "resize" */ 'vue-resize')
   .then(({ ResizeObserver }) => ResizeObserver))
 
 new Vue({

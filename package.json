@@ -8,9 +8,9 @@
     "dev": "VUE_APP_SOCKET=false vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "build:stats": "webpack --config node_modules/@vue/cli-service/webpack.config.js --mode production --profile --json > stats.json",
+    "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit --coverage --verbose",
     "test:e2e": "vue-cli-service test:e2e --headless",
-    "lint": "vue-cli-service lint",
     "dep": "npm-check -s"
   },
   "dependencies": {
@@ -40,7 +40,7 @@
     "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "^7.0.0-0",
     "node-sass": "^4.9.0",
-    "npm-check": "^5.7.0",
+    "npm-check": "^5.7.1",
     "sass-loader": "^7.0.1",
     "ts-jest": "^22.4.6",
     "ts-vue-plugin": "^0.2.0",

@@ -18,8 +18,6 @@
 </template>
 
 <script lang="ts">
-import Log from '@/components/Log.vue'
-import Project from '@/components/Project.vue'
 import Tab from '@/components/Tab.vue'
 import Tabs from '@/components/Tabs.vue'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
@@ -27,12 +25,11 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
-    Log,
-    Project,
+    Log: () => import(/* webpackChunkName: "log" */ '@/components/Log.vue'),
+    Project: () => import(/* webpackChunkName: "project" */ '@/components/Project.vue'),
     Tab,
     Tabs,
-    // lazy load
-    Term: () => import('@/components/Term.vue'),
+    Term: () => import(/* webpackChunkName: "term" */ '@/components/Term.vue'),
   },
 })
 export default class Panel extends Vue {
