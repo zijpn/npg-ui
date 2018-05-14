@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve --open",
     "dev": "VUE_APP_SOCKET=false vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "build:stats": "webpack --config node_modules/@vue/cli-service/webpack.config.js --mode production --profile --json > stats.json",
+    "build:stats": "webpack --config node_modules/@vue/cli-service/webpack.config.js --mode production --profile --json > .tmp; sed '/^{/,$!d' .tmp > stats.json; rm .tmp",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit --coverage --verbose",
     "test:e2e": "vue-cli-service test:e2e --headless",
