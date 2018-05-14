@@ -10,8 +10,8 @@ import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Tab extends Vue {
-  @Prop()
-  public label: string
+  @Prop({default: 'TAB'})
+  public label!: string
 
   @Provide()
   public isActive: boolean = false

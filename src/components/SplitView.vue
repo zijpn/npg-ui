@@ -11,21 +11,21 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class SplitView extends Vue {
   // input properties
-  @Prop()
-  public elements: string[]
+  @Prop({default: []})
+  public elements!: string[]
   @Prop({default: 'horizontal'})
-  public direction: 'horizontal' | 'vertical'
-  @Prop()
-  public sizes: number[]
-  @Prop()
-  public minSize: number[]
-  @Prop()
-  public gutterSize: number
-  @Prop()
-  public snapOffset: number
+  public direction!: 'horizontal' | 'vertical'
+  @Prop({default: []})
+  public sizes!: number[]
+  @Prop({default: []})
+  public minSize!: number[]
+  @Prop({default: 1})
+  public gutterSize!: number
+  @Prop({default: 10})
+  public snapOffset!: number
 
   // data properties
-  private split: Split.Instance
+  private split!: Split.Instance
 
   // methods
   public onDragEnd() {

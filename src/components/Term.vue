@@ -11,7 +11,7 @@ import { Terminal } from 'xterm'
 @Component
 export default class Term extends Vue {
   @Provide()
-  public term: Terminal
+  public term!: Terminal
 
   public fit() {
     const parent = this.term.element.parentElement as Element
