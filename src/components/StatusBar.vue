@@ -7,7 +7,6 @@
 </template>
 
 <script lang="ts">
-import socket from '@/socket'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
@@ -22,12 +21,19 @@ export default class StatusBar extends Vue {
 
   // lifecycle hook
   public mounted() {
-    const sock = socket.io.socket('/server')
-    sock.on('connect', () => {
-      sock.emit('version')
-      sock.on('version', (version: string) => {
-        this.$store.dispatch('setServerVersion', version)
-      })
+    import(/* webpackChunkName: "sock" */ 'socket.io-client').then((io) => {
+      if (process.env.VUE_APP_SOCKET) {
+        const sock = io.default('/server', {
+          path: '/api',
+          transports: ['websocket'],
+        })
+        sock.on('connect', () => {
+          sock.emit('version')
+          sock.on('version', (version: string) => {
+            this.$store.dispatch('setServerVersion', version)
+          })
+        })
+      }
     })
   }
 }

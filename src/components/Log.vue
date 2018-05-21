@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts">
-import socket from '@/socket'
 import faEraser from '@fortawesome/fontawesome-free-solid/faEraser'
 import { Component, Provide, Vue } from 'vue-property-decorator'
 
@@ -57,12 +56,19 @@ export default class Log extends Vue {
   }
 
   public mounted() {
-    const sock = socket.io.socket('/log')
-    sock.on('connect', () => {
-      this.clearLogs()
-      sock.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
-        msg.forEach(this.appendLog)
-      })
+    import(/* webpackChunkName: "sock" */ 'socket.io-client').then((io) => {
+      if (process.env.VUE_APP_SOCKET) {
+        const sock = io.default('/log', {
+          path: '/api',
+          transports: ['websocket'],
+        })
+        sock.on('connect', () => {
+          this.clearLogs()
+          sock.on('log', (msg: Array<{ timestamp: Date, level: string, msg: string }>) => {
+            msg.forEach(this.appendLog)
+          })
+        })
+      }
     })
   }
 

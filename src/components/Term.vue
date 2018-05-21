@@ -5,13 +5,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
-import { Terminal } from 'xterm'
+import { Component, Provide, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Term extends Vue {
   @Provide()
-  public term!: Terminal
+  public term: any
 
   public fit() {
     const parent = this.term.element.parentElement as Element
@@ -51,19 +50,17 @@ export default class Term extends Vue {
   }
 
   public mounted() {
-    this.initTerminal()
-    this.term.on('resize', this.logResize)
+    import(/* webpackChunkName: "term" */ 'xterm').then(({Terminal}) => {
+      this.term = new Terminal({
+        cursorBlink: true,
+        scrollback: 2000,
+      })
+      this.term.on('resize', this.logResize)
+    })
   }
 
   private logResize(size: any) {
     // console.log('Resized to ' + size.cols + ' cols and ' + size.rows + ' rows.')
-  }
-
-  private initTerminal() {
-    this.term = new Terminal({
-      cursorBlink: true,
-      scrollback: 2000,
-    })
   }
 }
 </script>

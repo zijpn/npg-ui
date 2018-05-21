@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   lintOnSave: false,
   devServer: {
@@ -7,5 +9,13 @@ module.exports = {
         ws: true
       }
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.IgnorePlugin(/^ws$/),
+    ]
+  },
+  chainWebpack: (config) => {
+    config.plugins.delete('prefetch')
   }
 }
