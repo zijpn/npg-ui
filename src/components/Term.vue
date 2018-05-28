@@ -67,7 +67,7 @@ export default class Term extends Vue {
           scrollback: 2000,
         })
         term.setOption('theme', {
-          background: '#1e1e1e'
+          background: '#1e1e1e',
         })
         this.sock.emit('create', {
           args: [],
