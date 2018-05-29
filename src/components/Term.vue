@@ -13,9 +13,8 @@
     <div class="new" @click="newTerm()" v-tooltip.bottom="{ content: 'New Terminal', delay: { show: 1500 } }">
       <font-awesome-icon :icon="plusIcon" size="xs" />
     </div>
-    <div ref="xterm" class="inner">
-      <resize-observer @notify="resize"/>
-    </div>
+    <div v-for="term in terms" :key="term.id" :ref="'xterm' + term.id" class="termtab" v-show="term.id == selected"></div>
+    <resize-observer @notify="resize"/>
   </div>
 </template>
 
@@ -34,6 +33,7 @@ export default class Term extends Vue {
   public selected: number = 0
 
   private sock: any = null
+  private term: any = null
 
   get plusIcon() {
     return faPlus
@@ -56,29 +56,29 @@ export default class Term extends Vue {
     current.term.dispose()
     this.terms = this.terms.filter((term) => term.id !== current.id)
     this.selected = (this.terms[0]) ? this.terms[0].id : 0
+    // $refs is non-reactive https://github.com/vuejs/vue/issues/4574
+    Vue.nextTick().then(() => {
+      delete this.$refs['xterm' + current.id]
+    })
   }
 
   public newTerm() {
     import(/* webpackChunkName: "term" */ 'xterm').then(({Terminal}) => {
       if (this.connected()) {
-        const term = new Terminal({
+        this.term = new Terminal({
           cursorBlink: true,
           fontSize: 12,
           scrollback: 2000,
         })
-        term.setOption('theme', {
+        this.term.setOption('theme', {
           background: '#1e1e1e',
         })
         this.sock.emit('create', {
           args: [],
-          cols: term.cols,
+          cols: this.term.cols,
           container: '',
-          rows: term.rows,
+          rows: this.term.rows,
         })
-        term.open(this.$refs.xterm as HTMLElement)
-        // add object to terms array & wait for created msg
-        this.terms.unshift({ term, id: 0, process: '' })
-        this.selected = 0
       }
     })
   }
@@ -101,14 +101,26 @@ export default class Term extends Vue {
         })
         this.sock.on('connect', () => {
           this.sock.on('created', (msg: { container: string, id: number, process: string }) => {
-            // console.log('terminal created', msg)
-            this.terms[0].id = msg.id
-            this.terms[0].process = msg.process
-            this.fit(this.terms[0].term)
-            this.terms[0].term.focus()
-            this.terms[0].term.on('data', this.sendData)
-            this.terms[0].term.on('resize', this.logResize)
+            // add to array
+            this.terms.unshift({
+              id: msg.id,
+              process: msg.process,
+              term: this.term,
+            })
             this.selected = msg.id
+            // vue needs to create our div, so that we can reference it
+            Vue.nextTick().then(() => {
+              // when ref is used on or inside v-for, they are registered as Arrays
+              // https://vuejs.org/v2/api/#ref
+              const ref = this.$refs['xterm' + msg.id] as Element[]
+              const parent = ref[0] as HTMLElement
+              this.term.open(parent)
+              this.fit(this.term)
+              this.term.focus()
+              this.term.on('data', this.sendData)
+              this.term.on('resize', this.logResize)
+
+            })
           })
           this.sock.on('close', (msg: { id: number }) => {
             if (msg.id !== this.selected) {
@@ -144,14 +156,6 @@ export default class Term extends Vue {
         })
       }
     })
-  }
-
-  public clear() {
-    // this.term.clear()
-  }
-
-  public scrollToBottom() {
-    // this.term.scrollToBottom()
   }
 
   private sendData(data: string) {
@@ -246,7 +250,7 @@ export default class Term extends Vue {
 .term {
   height: 100%;
 }
-.inner {
+.termtab {
   height: 100%;
 }
 .kill {
