@@ -4,6 +4,7 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -19,7 +20,13 @@
         "src/*"
       ]
     },
-    "plugins": [{ "name": "ts-vue-plugin" }]
+    "plugins": [{ "name": "ts-vue-plugin" }],
+    "lib": [
+      "es2015",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
   "include": [
     "src/**/*.ts",
