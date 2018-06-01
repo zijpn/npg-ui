@@ -234,6 +234,7 @@ export default class Term extends Vue {
   top: 2px;
   right: 78px;
   height: 24px;
+  width: 122px;
 }
 .termselect select {
   font-size: 0.8em;
@@ -243,15 +244,20 @@ export default class Term extends Vue {
   border: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
+  width: 100%;
 }
 .termselect select:active, .termselect select:focus {
   outline-style: none;
 }
 .term {
   height: 100%;
+  padding-top: 8px;  
+  padding-left: 15px;
+  padding-right: 0px;
 }
 .termtab {
   height: 100%;
+  width: 100%;
 }
 .kill {
   position: absolute;

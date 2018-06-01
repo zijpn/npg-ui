@@ -165,4 +165,17 @@ main {
   user-select: none;
 }
 
+::-webkit-scrollbar {
+  width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0px; 
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background: rgba(231, 231, 231, 0.5);
+}
+
 </style>

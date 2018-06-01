@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="log">
     <div class="loglevel">
       <select v-model="selected">
         <option>Debug</option>
@@ -8,13 +8,13 @@
         <option>Error</option>
       </select>
     </div>
-    <div class="clear" @click="clearLogs()" v-tooltip.bottom="{ content: 'Clear Log', delay: { show: 1500 } }">
+    <div class="logclear" @click="clearLogs()" v-tooltip.bottom="{ content: 'Clear Log', delay: { show: 1500 } }">
       <font-awesome-icon :icon="clearIcon" size="xs" />
     </div>
-    <div v-if="logEmpty()" class="empty">
+    <div v-if="logEmpty()" class="logempty">
       <h2>empty log</h2>
     </div>
-    <div v-else class="logs">
+    <div v-else class="logtable">
       <table>
         <tr v-for="(log, idx) in filteredLogs" :class="log.level" :key="idx">
           <td class="time">{{log.time}}</td>
@@ -94,7 +94,13 @@ export default class Log extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.clear {
+.log {
+  height: 100%;
+  padding-top: 8px;  
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.logclear {
   position: absolute;
   top: 2px;
   right: 30px;
@@ -105,6 +111,7 @@ export default class Log extends Vue {
   top: 2px;
   right: 54px;
   height: 24px;
+  width: 74px;
 }
 .loglevel select {
   font-size: 0.8em;
@@ -114,16 +121,17 @@ export default class Log extends Vue {
   border: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
+  width: 100%;
 }
 .loglevel select:active, .loglevel select:focus {
   outline-style: none;
 }
-.empty {
+.logempty {
   padding-top: 40px;
   text-align: center;
 }
-.logs {
-  padding-top: 8px; 
+.logtable {
+  height: 100%;
   overflow-y: scroll;
 }
 tr {
@@ -134,7 +142,7 @@ tr {
 td {
   display: inline-block;
   padding: 0;
-  padding-left: 8px;
+  padding-left: 12px;
   vertical-align: top;
 }
 td.time {
@@ -144,7 +152,7 @@ td.lvl {
   width: 50px;
 }
 td.msg {
-  width: calc(100vw - 218px - 50px);
+  width: calc(100vw - 222px - 50px);
 }
 tr.debug {
   color: grey;

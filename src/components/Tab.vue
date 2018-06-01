@@ -1,5 +1,5 @@
 <template>
-  <div v-show="isActive" class="tab-item">
+  <div v-show="isActive">
     <slot />
   </div>
 </template>
@@ -37,9 +37,4 @@ export default class Tab extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
-.tab-item {
-  flex: 1;
-}
-
 </style>
