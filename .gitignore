@@ -6,6 +6,7 @@ coverage
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 
+.tmp
 stats.json
 
 # local env files
