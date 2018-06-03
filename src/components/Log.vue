@@ -58,7 +58,7 @@ export default class Log extends Vue {
   public mounted() {
     import(/* webpackChunkName: "sock" */ 'socket.io-client').then((io) => {
       if (process.env.VUE_APP_SOCKET) {
-        const sock = io.default('/log', {
+        const sock = io.connect('/log', {
           path: '/api',
           transports: ['websocket'],
         })

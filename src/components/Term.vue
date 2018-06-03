@@ -95,7 +95,7 @@ export default class Term extends Vue {
   public mounted() {
     import(/* webpackChunkName: "sock" */ 'socket.io-client').then((io) => {
       if (process.env.VUE_APP_SOCKET) {
-        this.sock = io.default('/term', {
+        this.sock = io.connect('/term', {
           path: '/api',
           transports: ['websocket'],
         })
