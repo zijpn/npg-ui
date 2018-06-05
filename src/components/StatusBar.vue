@@ -1,18 +1,30 @@
 <template>
   <footer class="footer">
     <div class="version disable-select">
-      ui {{uiVersion}}, server {{serverVersion}}
+      ui: {{ uiVersion }}
+    </div>
+    <div class="version disable-select">
+      server: {{ serverVersion }}
+    </div>
+    <div v-for="(b,idx) in backend" :key="b.idx" class="backend disable-select" :class="{ 'push': idx == 0 }" 
+         v-tooltip.top="{ content: b.host, trigger: 'click' }">
+      {{ b.name }}
+      <span class="status-indicator" :class="[ b.status == 'Running' ? 'positive' : 'negative' ]"></span>
     </div>
   </footer>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
 
 @Component
 export default class StatusBar extends Vue {
+
   @Prop({default: '0.1.0'})
   public uiVersion!: string
+
+  @Provide()
+  public backend: Array<{ host: string, name: string, status: string }> = []
 
   // computed
   get serverVersion() {
@@ -28,9 +40,11 @@ export default class StatusBar extends Vue {
           transports: ['websocket'],
         })
         sock.on('connect', () => {
-          sock.emit('version')
           sock.on('version', (version: string) => {
             this.$store.dispatch('setServerVersion', version)
+          })
+          sock.on('backend', (backend: Array<{ host: string, name: string, status: string }>) => {
+            this.backend = backend
           })
         })
       }
@@ -51,11 +65,33 @@ export default class StatusBar extends Vue {
   left: 0px;
   bottom: 0px;
   position: absolute;
-
+  display: flex;
 }
 .version {
-  display: flex;
-  justify-content: center;
-  margin: auto;
+  padding-right: 10px;
+}
+.backend {
+  padding: 0 5px;
+  cursor: pointer;
+}
+.backend:hover {
+  background-color: rgba(220, 220, 220, .2);;
+}
+.push {
+  margin-left: auto;
+}
+.status-indicator {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(216, 226, 233, .5);
+}
+.positive {
+  background-color: rgba(75, 210, 143, .9);
+}
+.negative {
+  background-color: rgba(255, 77, 77, .9);
 }
 </style>

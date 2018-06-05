@@ -12,13 +12,13 @@ describe('StatusBar.vue', () => {
     },
   })
   it('render', () => {
-    const msg = 'ui 0.1.0, server dev'
+    const msg = 'ui:0.1.0server:dev'
     const wrapper = shallowMount(StatusBar, {
       localVue,
       mocks: {
         $store: store,
       },
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect(wrapper.text().replace(/\s/g, '')).toMatch(msg)
   })
 })
