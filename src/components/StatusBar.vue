@@ -40,9 +40,11 @@ export default class StatusBar extends Vue {
           transports: ['websocket'],
         })
         sock.on('connect', () => {
+          sock.emit('version')
           sock.on('version', (version: string) => {
             this.$store.dispatch('setServerVersion', version)
           })
+          sock.emit('backend')
           sock.on('backend', (backend: Array<{ host: string, name: string, status: string }>) => {
             this.backend = backend
           })
