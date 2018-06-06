@@ -28,14 +28,13 @@
 
 <script lang="ts">
 import faEraser from '@fortawesome/fontawesome-free-solid/faEraser'
-import { Component, Provide, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Log extends Vue {
-  @Provide()
-  public selected: string = 'Info'
 
-  @Provide()
+  // data properties
+  public selected: string = 'Info'
   public logs: Array<{ time: string, level: string, msg: string }> = []
 
   public clearLogs() {

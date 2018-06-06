@@ -21,15 +21,13 @@
 <script lang="ts">
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
-import { Component, Provide, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Term extends Vue {
 
-  @Provide()
+  // data properties
   public terms: Array<{ term: any, id: number, process: string }> = []
-
-  @Provide()
   public selected: number = 0
 
   private sock: any = null

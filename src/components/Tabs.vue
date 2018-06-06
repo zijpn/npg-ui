@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Tab from '@/components/Tab.vue'
-import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Tabs extends Vue {
@@ -26,7 +26,7 @@ export default class Tabs extends Vue {
     return this.$store.state.panelTab
   }
 
-  @Provide()
+  // data properties
   public tabs: Tab[] = []
 
   public register(tab: Tab) {

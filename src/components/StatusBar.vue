@@ -23,15 +23,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class StatusBar extends Vue {
 
-  @Prop({default: '0.1.0'})
-  public uiVersion!: string
-
-  @Provide()
+  // data properties
+  public uiVersion: string = '0.1.0'
   public backend: Array<{ host: string, name: string, status: string }> = []
 
   // computed

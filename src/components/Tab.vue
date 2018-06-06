@@ -6,14 +6,15 @@
 
 <script lang="ts">
 import Tabs from '@/components/Tabs.vue'
-import { Component, Prop, Provide, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Tab extends Vue {
+
   @Prop({default: 'TAB'})
   public label!: string
 
-  @Provide()
+  // data properties
   public isActive: boolean = false
 
   public activate() {
