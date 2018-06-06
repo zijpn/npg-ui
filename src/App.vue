@@ -80,6 +80,10 @@ main {
   width: calc(100vw - 50px);
 }
 
+:focus {
+  outline: none;
+}
+
 .tooltip .tooltip-inner {
   max-width: 24rem;
   background: rgba(74, 74, 74, 0.9);
@@ -156,6 +160,17 @@ main {
   left: calc(50% - 8px);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.tooltip.popover .popover-inner {
+  background: #424242;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.tooltip.popover .popover-arrow {
+  border-color: #424242;
 }
 
 .disable-select {

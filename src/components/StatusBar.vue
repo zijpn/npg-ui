@@ -6,10 +6,18 @@
     <div class="version disable-select">
       server: {{ serverVersion }}
     </div>
-    <div v-for="(b,idx) in backend" :key="b.idx" class="backend disable-select" :class="{ 'push': idx == 0 }" 
-         v-tooltip.top="{ content: b.host, trigger: 'click' }">
-      {{ b.name }}
-      <span class="status-indicator" :class="[ b.status == 'Running' ? 'positive' : 'negative' ]"></span>
+    <div v-for="(b,idx) in backend" :key="b.idx" class="backend disable-select" :class="{ 'push': idx == 0 }">
+      <v-popover>
+        <!-- popover target (for events and position) -->
+        <div class="">
+          {{ b.name }}
+          <span class="status-indicator" :class="[ b.status == 'Running' ? 'positive' : 'negative' ]"></span>
+        </div>
+        <!-- content of the popover -->
+        <template slot="popover">
+          <p>{{ b.host }}</p>
+        </template>
+      </v-popover>
     </div>
   </footer>
 </template>
