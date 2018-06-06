@@ -60,7 +60,7 @@ export default class SideBar extends Vue {
 
 .sidebar {
   width: 50px;
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(66, 66, 66);
   top: 0px;
   left: 0px;
   bottom: 22px;
@@ -74,10 +74,9 @@ export default class SideBar extends Vue {
   height: 40px;
   margin: 0;
   padding: 10px 0;
-  color: white;
   font-size: 14px;
   text-align: center;
-  color: grey;
+  color: rgb(179, 179, 179)
 }
 
 .item:hover, .active {

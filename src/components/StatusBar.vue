@@ -16,6 +16,10 @@
         <!-- content of the popover -->
         <template slot="popover">
           <p>{{ b.host }}</p>
+          <div v-close-popover class="mbutton" @click="openTerminal(b.name)" v-if="b.status == 'Running'">
+            <span style="padding-right: 8px">Terminal</span>
+            <font-awesome-icon :icon="terminalIcon" />
+          </div>
         </template>
       </v-popover>
     </div>
@@ -23,6 +27,7 @@
 </template>
 
 <script lang="ts">
+import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
@@ -33,6 +38,10 @@ export default class StatusBar extends Vue {
   public backend: Array<{ host: string, name: string, status: string }> = []
 
   // computed
+  get terminalIcon() {
+    return faTerminal
+  }
+
   get serverVersion() {
     return this.$store.state.serverVersion
   }
@@ -56,6 +65,18 @@ export default class StatusBar extends Vue {
           })
         })
       }
+    })
+  }
+
+  public openTerminal(name: string) {
+    // open terminal panel if not visible
+    if (!this.$store.getters.terminalPanelActive) {
+      this.$store.dispatch('togglePanel', 1)
+    }
+    // terminal request
+    this.$store.dispatch('setTerminal', {
+      backend: name,
+      container: '',
     })
   }
 }
@@ -101,5 +122,19 @@ export default class StatusBar extends Vue {
 }
 .negative {
   background-color: rgba(255, 77, 77, .9);
+}
+.mbutton {
+  cursor: pointer;
+  margin-top: 5px;
+  padding: 2px 4px;
+  font-size: 14px;
+  text-align: center;
+  color: rgb(179, 179, 179);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+.mbutton:hover, .active {
+  color: white;
 }
 </style>

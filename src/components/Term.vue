@@ -27,7 +27,7 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class Term extends Vue {
 
   // data properties
-  public terms: Array<{ term: any, id: number, process: string }> = []
+  public terms: Array<{ term: any, id: number, process: string, backend: string, container: string }> = []
   public selected: number = 0
 
   private sock: any = null
@@ -60,7 +60,7 @@ export default class Term extends Vue {
     })
   }
 
-  public newTerm() {
+  public newTerm(backend: string = '', container: string = '') {
     import(/* webpackChunkName: "term" */ 'xterm').then(({Terminal}) => {
       if (this.connected()) {
         this.term = new Terminal({
@@ -72,9 +72,9 @@ export default class Term extends Vue {
           background: '#1e1e1e',
         })
         this.sock.emit('create', {
-          args: [],
+          backend,
           cols: this.term.cols,
-          container: '',
+          container,
           rows: this.term.rows,
         })
       }
@@ -98,9 +98,11 @@ export default class Term extends Vue {
           transports: ['websocket'],
         })
         this.sock.on('connect', () => {
-          this.sock.on('created', (msg: { container: string, id: number, process: string }) => {
+          this.sock.on('created', (msg: { backend: string, container: string, id: number, process: string }) => {
             // add to array
             this.terms.unshift({
+              backend: msg.backend,
+              container: msg.container,
               id: msg.id,
               process: msg.process,
               term: this.term,
@@ -141,6 +143,29 @@ export default class Term extends Vue {
             }
           })
         })
+        this.$store.watch(
+          (state) => {
+            return {
+              backend: this.$store.state.terminalBackend,
+              container: this.$store.state.terminalContainer,
+            }
+          },
+          (request) => {
+            if (request.backend) {
+              const exists = this.findTermBy(request.backend, request.container)
+              if (exists) {
+                this.selected = exists.id
+              } else {
+                this.newTerm(request.backend, request.container)
+              }
+              // term request is handled
+              this.$store.dispatch('setTerminal', {
+                backend: '',
+                container: '',
+              })
+            }
+          },
+        )
       }
     })
   }
@@ -214,6 +239,10 @@ export default class Term extends Vue {
 
   private findTerm(id: number) {
     return this.terms.find((term) => term.id === id)
+  }
+
+  private findTermBy(backend: string, container: string) {
+    return this.terms.find((term) => term.backend === backend && term.container === container)
   }
 
   private connected() {

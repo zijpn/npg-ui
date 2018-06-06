@@ -16,6 +16,9 @@ export default new Vuex.Store({
     setServerVersion({ commit }, version) {
       commit('SET_SERVER_VERSION', version)
     },
+    setTerminal({ commit }, param) {
+      commit('SET_TERMINAL', param)
+    },
     togglePanel({ commit }, index) {
       commit('TOGGLE_PANEL', index)
     },
@@ -46,6 +49,10 @@ export default new Vuex.Store({
     ['SET_SERVER_VERSION'](state, version) {
       state.serverVersion = version
     },
+    ['SET_TERMINAL'](state, param) {
+      state.terminalBackend = param.backend
+      state.terminalContainer = param.container
+    },
     ['TOGGLE_PANEL'](state, index) {
       if (state.panelTab !== index) {
         state.panelTab = index
@@ -68,6 +75,9 @@ export default new Vuex.Store({
     panelVisible: false,
     // version of the NPG server
     serverVersion: 'dev',
+    // terminal request
+    terminalBackend: '',
+    terminalContainer: '',
   },
   strict: process.env.NODE_ENV !== 'production',
 })

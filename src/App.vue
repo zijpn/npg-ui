@@ -84,6 +84,10 @@ main {
   outline: none;
 }
 
+.tooltip {
+  z-index: 10000;
+}
+
 .tooltip .tooltip-inner {
   max-width: 24rem;
   background: rgba(74, 74, 74, 0.9);
@@ -163,14 +167,14 @@ main {
 }
 
 .tooltip.popover .popover-inner {
-  background: #424242;
+  background:  rgb(66, 66, 66);
   color: white;
   padding: 10px;
   border-radius: 5px;
 }
 
 .tooltip.popover .popover-arrow {
-  border-color: #424242;
+  border-color:  rgb(66, 66, 66);
 }
 
 .disable-select {
