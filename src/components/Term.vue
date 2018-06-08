@@ -1,7 +1,7 @@
 <template>
   <div class="term">
      <div class="termselect">
-      <select v-model="selected">
+      <select v-model="selected" @change="changeTerm()">
         <option v-for="term in terms" :key="term.id" :value="term.id">
           {{ term.id }}:{{ term.process }}
         </option>
@@ -57,6 +57,7 @@ export default class Term extends Vue {
     // $refs is non-reactive https://github.com/vuejs/vue/issues/4574
     Vue.nextTick().then(() => {
       delete this.$refs['xterm' + current.id]
+      this.focus()
     })
   }
 
@@ -64,7 +65,7 @@ export default class Term extends Vue {
     import(/* webpackChunkName: "term" */ 'xterm').then(({Terminal}) => {
       if (this.connected()) {
         this.term = new Terminal({
-          cursorBlink: true,
+          cursorBlink: false,
           fontSize: 12,
           scrollback: 2000,
         })
@@ -78,6 +79,12 @@ export default class Term extends Vue {
           rows: this.term.rows,
         })
       }
+    })
+  }
+
+  public changeTerm() {
+    Vue.nextTick().then(() => {
+      this.focus()
     })
   }
 
@@ -155,6 +162,9 @@ export default class Term extends Vue {
               const exists = this.findTermBy(request.backend, request.container)
               if (exists) {
                 this.selected = exists.id
+                Vue.nextTick().then(() => {
+                  exists.term.focus()
+                })
               } else {
                 this.newTerm(request.backend, request.container)
               }
@@ -233,6 +243,15 @@ export default class Term extends Vue {
       if (term.rows !== rows || term.cols !== cols) {
         renderer.clear()
         term.resize(cols, rows)
+      }
+    }
+  }
+
+  private focus() {
+    if (this.selected) {
+      const c = this.findTerm(this.selected)
+      if (c) {
+        c.term.focus()
       }
     }
   }
