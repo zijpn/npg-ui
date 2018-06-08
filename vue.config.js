@@ -18,8 +18,8 @@ module.exports = {
   chainWebpack: (config) => {
     config.plugins.delete('prefetch')
     // @vue/cli-service/lib/config/app.js
-    config.optimization.splitChunks({
-      chunks: 'all'
-    })
+    //config.optimization.splitChunks({
+    //  chunks: 'all'
+    //})
   }
 }
