@@ -50,7 +50,7 @@ export default class Log extends Vue {
     this.logs.unshift({
       level: log.level,
       msg: log.msg,
-      time: ts.toLocaleString(),
+      time: ts.toLocaleString('en-GB', { hour12: false }),
     })
   }
 
