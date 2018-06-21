@@ -19,9 +19,7 @@
 </template>
 
 <script lang="ts">
-import faBug from '@fortawesome/fontawesome-free-solid/faBug'
-import faFile from '@fortawesome/fontawesome-free-solid/faFile'
-import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
+import { faBug, faFile, faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component

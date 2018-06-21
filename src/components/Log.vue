@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import faEraser from '@fortawesome/fontawesome-free-solid/faEraser'
+import { faEraser } from '@fortawesome/free-solid-svg-icons'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component

@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import faTerminal from '@fortawesome/fontawesome-free-solid/faTerminal'
+import { faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component

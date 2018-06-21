@@ -19,8 +19,7 @@
 </template>
 
 <script lang="ts">
-import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
-import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
+import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
