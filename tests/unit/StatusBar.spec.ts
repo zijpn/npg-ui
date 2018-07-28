@@ -6,18 +6,21 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 describe('StatusBar.vue', () => {
-  const store = new Vuex.Store({
-    state: {
-      serverVersion: 'dev',
-    },
+  let store: any
+
+  beforeEach(() => {
+    store = new Vuex.Store({
+      state: {
+        serverVersion: 'dev',
+      },
+    })
   })
+
   it('render', () => {
     const msg = 'ui:0.1.0server:dev'
     const wrapper = shallowMount(StatusBar, {
       localVue,
-      mocks: {
-        $store: store,
-      },
+      store,
     })
     expect(wrapper.text().replace(/\s/g, '')).toMatch(msg)
   })
