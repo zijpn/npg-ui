@@ -233,9 +233,9 @@ export default class Term extends Vue {
     const elementPaddingVer = elementPadding.top + elementPadding.bottom
     const elementPaddingHor = elementPadding.right + elementPadding.left
     const availableHeight = parentElementHeight - elementPaddingVer
-    const scrollBarWidth = term.viewport.scrollBarWidth
+    const scrollBarWidth = term._core.viewport.scrollBarWidth
     const availableWidth = parentElementWidth - elementPaddingHor - scrollBarWidth
-    const renderer = term.renderer
+    const renderer = term._core.renderer
     if (renderer.dimensions.actualCellWidth && renderer.dimensions.actualCellWidth) {
       const cols = Math.floor(availableWidth / renderer.dimensions.actualCellWidth)
       const rows = Math.floor(availableHeight / renderer.dimensions.actualCellHeight)

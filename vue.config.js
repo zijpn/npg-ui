@@ -1,3 +1,5 @@
+// https://cli.vuejs.org/config/#vue-config-js
+
 const webpack = require('webpack')
 
 module.exports = {

@@ -12,7 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "node",
+      "webpack-env",
       "jest"
     ],
     "paths": {
@@ -22,7 +22,7 @@
     },
     "plugins": [{ "name": "ts-vue-plugin" }],
     "lib": [
-      "es2015",
+      "esnext",
       "dom",
       "dom.iterable",
       "scripthost"
